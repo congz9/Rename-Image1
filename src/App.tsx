@@ -520,34 +520,6 @@ export default function App() {
                 </Tabs>
 
                 <div className="space-y-6">
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 ml-1">Kích thước: {watermarkSize}%</Label>
-                    </div>
-                    <input 
-                      type="range"
-                      min="1"
-                      max="100"
-                      value={watermarkSize}
-                      onChange={(e) => setWatermarkSize(parseInt(e.target.value))}
-                      className="w-full h-1.5 bg-gray-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                    />
-                  </div>
-
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 ml-1">Độ mờ: {Math.round((watermarkOpacity || 0) * 100)}%</Label>
-                    </div>
-                    <input 
-                      type="range"
-                      min="0"
-                      max="100"
-                      value={(watermarkOpacity || 0) * 100}
-                      onChange={(e) => setWatermarkOpacity(parseInt(e.target.value) / 100)}
-                      className="w-full h-1.5 bg-gray-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                    />
-                  </div>
-
                   <div className="space-y-4">
                     <div className="flex flex-col items-center space-y-3 pt-2">
                       <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500">Vị trí đóng dấu</Label>
@@ -731,6 +703,32 @@ export default function App() {
                             draggable={false}
                           />
                         )}
+                      </div>
+                    </div>
+
+                    {/* Sliders moved below image */}
+                    <div className="grid grid-cols-2 gap-4 pt-2">
+                      <div className="space-y-2">
+                        <Label className="text-[10px] font-bold uppercase tracking-wider text-blue-500 ml-1">Kích thước: {watermarkSize}%</Label>
+                        <input 
+                          type="range"
+                          min="1"
+                          max="100"
+                          value={watermarkSize}
+                          onChange={(e) => setWatermarkSize(parseInt(e.target.value))}
+                          className="w-full h-1 bg-gray-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label className="text-[10px] font-bold uppercase tracking-wider text-blue-500 ml-1">Độ mờ: {Math.round((watermarkOpacity || 0) * 100)}%</Label>
+                        <input 
+                          type="range"
+                          min="0"
+                          max="100"
+                          value={(watermarkOpacity || 0) * 100}
+                          onChange={(e) => setWatermarkOpacity(parseInt(e.target.value) / 100)}
+                          className="w-full h-1 bg-gray-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                        />
                       </div>
                     </div>
                     <p className="text-[9px] text-gray-400 italic text-center">Dấu sẽ được áp dụng cho toàn bộ {files.length} ảnh khi xuất file.</p>
