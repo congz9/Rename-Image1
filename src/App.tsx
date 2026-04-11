@@ -317,7 +317,6 @@ export default function App() {
           >
             {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
           </Button>
-          <Separator orientation="vertical" className="h-6 bg-gray-200 dark:bg-white/10" />
           {files.length > 0 && (
             <Button 
               variant="ghost" 
