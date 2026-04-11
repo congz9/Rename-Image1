@@ -557,7 +557,7 @@ export default function App() {
                           variant={watermarkPosition === 'top-left' ? 'secondary' : 'outline'}
                           size="sm"
                           className={cn(
-                            "w-12 h-12 rounded-lg text-[8px] font-bold leading-tight p-1 transition-all",
+                            "w-14 h-14 rounded-xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center",
                             watermarkPosition === 'top-left' 
                               ? "bg-blue-500/10 text-blue-500 border-blue-500/20" 
                               : "border-gray-200 dark:border-white/10 text-gray-400"
@@ -568,12 +568,13 @@ export default function App() {
                             setWatermarkY(5);
                           }}
                         >
-                          TRÁI<br/>TRÊN
+                          <span>TRÁI</span>
+                          <span>TRÊN</span>
                         </Button>
                         <Button
                           variant="outline"
                           size="icon"
-                          className="w-12 h-12 rounded-lg border-gray-200 dark:border-white/10"
+                          className="w-14 h-14 rounded-xl border-gray-200 dark:border-white/10"
                           onClick={() => setWatermarkY(prev => Math.max(0, prev - 1))}
                         >
                           <ChevronUp className="w-5 h-5" />
@@ -582,7 +583,7 @@ export default function App() {
                           variant={watermarkPosition === 'top-right' ? 'secondary' : 'outline'}
                           size="sm"
                           className={cn(
-                            "w-12 h-12 rounded-lg text-[8px] font-bold leading-tight p-1 transition-all",
+                            "w-14 h-14 rounded-xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center",
                             watermarkPosition === 'top-right' 
                               ? "bg-blue-500/10 text-blue-500 border-blue-500/20" 
                               : "border-gray-200 dark:border-white/10 text-gray-400"
@@ -593,14 +594,15 @@ export default function App() {
                             setWatermarkY(5);
                           }}
                         >
-                          PHẢI<br/>TRÊN
+                          <span>PHẢI</span>
+                          <span>TRÊN</span>
                         </Button>
 
                         {/* Row 2 */}
                         <Button
                           variant="outline"
                           size="icon"
-                          className="w-12 h-12 rounded-lg border-gray-200 dark:border-white/10"
+                          className="w-14 h-14 rounded-xl border-gray-200 dark:border-white/10"
                           onClick={() => setWatermarkX(prev => Math.max(0, prev - 1))}
                         >
                           <ChevronLeft className="w-5 h-5" />
@@ -609,7 +611,7 @@ export default function App() {
                           variant={watermarkPosition === 'center' ? 'secondary' : 'outline'}
                           size="sm"
                           className={cn(
-                            "w-12 h-12 rounded-lg text-[8px] font-bold leading-tight p-1 transition-all",
+                            "w-14 h-14 rounded-xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center",
                             watermarkPosition === 'center' 
                               ? "bg-blue-500/10 text-blue-500 border-blue-500/20" 
                               : "border-gray-200 dark:border-white/10 text-gray-400"
@@ -625,7 +627,7 @@ export default function App() {
                         <Button
                           variant="outline"
                           size="icon"
-                          className="w-12 h-12 rounded-lg border-gray-200 dark:border-white/10"
+                          className="w-14 h-14 rounded-xl border-gray-200 dark:border-white/10"
                           onClick={() => setWatermarkX(prev => Math.min(100, prev + 1))}
                         >
                           <ChevronRight className="w-5 h-5" />
@@ -636,7 +638,7 @@ export default function App() {
                           variant={watermarkPosition === 'bottom-left' ? 'secondary' : 'outline'}
                           size="sm"
                           className={cn(
-                            "w-12 h-12 rounded-lg text-[8px] font-bold leading-tight p-1 transition-all",
+                            "w-14 h-14 rounded-xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center",
                             watermarkPosition === 'bottom-left' 
                               ? "bg-blue-500/10 text-blue-500 border-blue-500/20" 
                               : "border-gray-200 dark:border-white/10 text-gray-400"
@@ -647,12 +649,13 @@ export default function App() {
                             setWatermarkY(95);
                           }}
                         >
-                          TRÁI<br/>DƯỚI
+                          <span>TRÁI</span>
+                          <span>DƯỚI</span>
                         </Button>
                         <Button
                           variant="outline"
                           size="icon"
-                          className="w-12 h-12 rounded-lg border-gray-200 dark:border-white/10"
+                          className="w-14 h-14 rounded-xl border-gray-200 dark:border-white/10"
                           onClick={() => setWatermarkY(prev => Math.min(100, prev + 1))}
                         >
                           <ChevronDown className="w-5 h-5" />
@@ -661,7 +664,7 @@ export default function App() {
                           variant={watermarkPosition === 'bottom-right' ? 'secondary' : 'outline'}
                           size="sm"
                           className={cn(
-                            "w-12 h-12 rounded-lg text-[8px] font-bold leading-tight p-1 transition-all",
+                            "w-14 h-14 rounded-xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center",
                             watermarkPosition === 'bottom-right' 
                               ? "bg-blue-500/10 text-blue-500 border-blue-500/20" 
                               : "border-gray-200 dark:border-white/10 text-gray-400"
@@ -672,7 +675,8 @@ export default function App() {
                             setWatermarkY(95);
                           }}
                         >
-                          PHẢI<br/>DƯỚI
+                          <span>PHẢI</span>
+                          <span>DƯỚI</span>
                         </Button>
                       </div>
                     </div>
