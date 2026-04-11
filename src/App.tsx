@@ -75,6 +75,7 @@ export default function App() {
   const [watermarkPosition, setWatermarkPosition] = useState<WatermarkPosition>('bottom-right');
   const [watermarkX, setWatermarkX] = useState(95); // Default for bottom-right
   const [watermarkY, setWatermarkY] = useState(95); // Default for bottom-right
+  const [watermarkSize, setWatermarkSize] = useState(20); // Scale 1-100
   
   const fileInputRef = useRef<HTMLInputElement>(null);
   const folderInputRef = useRef<HTMLInputElement>(null);
@@ -171,7 +172,7 @@ export default function App() {
           ctx.globalAlpha = watermarkOpacity;
           
           if (watermarkType === 'text' && watermarkText) {
-            const fontSize = Math.floor(canvas.width * 0.05);
+            const fontSize = Math.floor(canvas.width * (watermarkSize / 400));
             ctx.font = `bold ${fontSize}px ${watermarkFont}`;
             ctx.fillStyle = watermarkColor;
             
@@ -187,7 +188,7 @@ export default function App() {
           } else if (watermarkType === 'image' && watermarkImage) {
             const wmImg = new Image();
             wmImg.onload = () => {
-              const scale = 0.2;
+              const scale = watermarkSize / 100;
               const w = canvas.width * scale;
               const h = (wmImg.height / wmImg.width) * w;
               
@@ -521,6 +522,20 @@ export default function App() {
                 <div className="space-y-6">
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
+                      <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 ml-1">Kích thước: {watermarkSize}%</Label>
+                    </div>
+                    <input 
+                      type="range"
+                      min="1"
+                      max="100"
+                      value={watermarkSize}
+                      onChange={(e) => setWatermarkSize(parseInt(e.target.value))}
+                      className="w-full h-1.5 bg-gray-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                    />
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
                       <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 ml-1">Độ mờ: {Math.round((watermarkOpacity || 0) * 100)}%</Label>
                     </div>
                     <input 
@@ -534,81 +549,131 @@ export default function App() {
                   </div>
 
                   <div className="space-y-4">
-                    <div className="flex justify-between items-center">
-                      <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 ml-1">Vị trí đóng dấu</Label>
-                    </div>
-                    <div className="grid grid-cols-3 gap-2">
-                      {[
-                        { id: 'top-left', label: 'Trái trên', x: 5, y: 5 },
-                        { id: 'top-right', label: 'Phải trên', x: 95, y: 5 },
-                        { id: 'center', label: 'Giữa', x: 50, y: 50 },
-                        { id: 'bottom-left', label: 'Trái dưới', x: 5, y: 95 },
-                        { id: 'bottom-right', label: 'Phải dưới', x: 95, y: 95 },
-                      ].map((pos) => (
+                    <div className="flex flex-col items-center space-y-3 pt-2">
+                      <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500">Vị trí đóng dấu</Label>
+                      <div className="grid grid-cols-3 gap-2">
+                        {/* Row 1 */}
                         <Button
-                          key={pos.id}
-                          variant={watermarkPosition === pos.id ? 'secondary' : 'ghost'}
+                          variant={watermarkPosition === 'top-left' ? 'secondary' : 'outline'}
                           size="sm"
-                          onClick={() => {
-                            setWatermarkPosition(pos.id as any);
-                            setWatermarkX(pos.x);
-                            setWatermarkY(pos.y);
-                          }}
                           className={cn(
-                            "text-[9px] font-bold uppercase h-8 rounded-lg border transition-all",
-                            watermarkPosition === pos.id 
+                            "w-12 h-12 rounded-lg text-[8px] font-bold leading-tight p-1 transition-all",
+                            watermarkPosition === 'top-left' 
                               ? "bg-blue-500/10 text-blue-500 border-blue-500/20" 
-                              : "border-transparent text-gray-400"
+                              : "border-gray-200 dark:border-white/10 text-gray-400"
                           )}
+                          onClick={() => {
+                            setWatermarkPosition('top-left');
+                            setWatermarkX(5);
+                            setWatermarkY(5);
+                          }}
                         >
-                          {pos.label}
+                          TRÁI<br/>TRÊN
                         </Button>
-                      ))}
-                    </div>
-
-                    {/* Manual Nudge Controls */}
-                    <div className="flex flex-col items-center space-y-2 pt-2">
-                      <Label className="text-[10px] font-bold uppercase tracking-wider text-blue-500">Chỉnh thủ công (Pixel)</Label>
-                      <div className="grid grid-cols-3 gap-1">
-                        <div />
                         <Button
                           variant="outline"
                           size="icon"
-                          className="w-8 h-8 rounded-lg"
+                          className="w-12 h-12 rounded-lg border-gray-200 dark:border-white/10"
                           onClick={() => setWatermarkY(prev => Math.max(0, prev - 1))}
                         >
-                          <ChevronUp className="w-4 h-4" />
+                          <ChevronUp className="w-5 h-5" />
                         </Button>
-                        <div />
+                        <Button
+                          variant={watermarkPosition === 'top-right' ? 'secondary' : 'outline'}
+                          size="sm"
+                          className={cn(
+                            "w-12 h-12 rounded-lg text-[8px] font-bold leading-tight p-1 transition-all",
+                            watermarkPosition === 'top-right' 
+                              ? "bg-blue-500/10 text-blue-500 border-blue-500/20" 
+                              : "border-gray-200 dark:border-white/10 text-gray-400"
+                          )}
+                          onClick={() => {
+                            setWatermarkPosition('top-right');
+                            setWatermarkX(95);
+                            setWatermarkY(5);
+                          }}
+                        >
+                          PHẢI<br/>TRÊN
+                        </Button>
+
+                        {/* Row 2 */}
                         <Button
                           variant="outline"
                           size="icon"
-                          className="w-8 h-8 rounded-lg"
+                          className="w-12 h-12 rounded-lg border-gray-200 dark:border-white/10"
                           onClick={() => setWatermarkX(prev => Math.max(0, prev - 1))}
                         >
-                          <ChevronLeft className="w-4 h-4" />
+                          <ChevronLeft className="w-5 h-5" />
                         </Button>
-                        <div className="w-8 h-8 flex items-center justify-center">
-                          <Plus className="w-3 h-3 text-gray-300" />
-                        </div>
+                        <Button
+                          variant={watermarkPosition === 'center' ? 'secondary' : 'outline'}
+                          size="sm"
+                          className={cn(
+                            "w-12 h-12 rounded-lg text-[8px] font-bold leading-tight p-1 transition-all",
+                            watermarkPosition === 'center' 
+                              ? "bg-blue-500/10 text-blue-500 border-blue-500/20" 
+                              : "border-gray-200 dark:border-white/10 text-gray-400"
+                          )}
+                          onClick={() => {
+                            setWatermarkPosition('center');
+                            setWatermarkX(50);
+                            setWatermarkY(50);
+                          }}
+                        >
+                          GIỮA
+                        </Button>
                         <Button
                           variant="outline"
                           size="icon"
-                          className="w-8 h-8 rounded-lg"
+                          className="w-12 h-12 rounded-lg border-gray-200 dark:border-white/10"
                           onClick={() => setWatermarkX(prev => Math.min(100, prev + 1))}
                         >
-                          <ChevronRight className="w-4 h-4" />
+                          <ChevronRight className="w-5 h-5" />
                         </Button>
-                        <div />
+
+                        {/* Row 3 */}
+                        <Button
+                          variant={watermarkPosition === 'bottom-left' ? 'secondary' : 'outline'}
+                          size="sm"
+                          className={cn(
+                            "w-12 h-12 rounded-lg text-[8px] font-bold leading-tight p-1 transition-all",
+                            watermarkPosition === 'bottom-left' 
+                              ? "bg-blue-500/10 text-blue-500 border-blue-500/20" 
+                              : "border-gray-200 dark:border-white/10 text-gray-400"
+                          )}
+                          onClick={() => {
+                            setWatermarkPosition('bottom-left');
+                            setWatermarkX(5);
+                            setWatermarkY(95);
+                          }}
+                        >
+                          TRÁI<br/>DƯỚI
+                        </Button>
                         <Button
                           variant="outline"
                           size="icon"
-                          className="w-8 h-8 rounded-lg"
+                          className="w-12 h-12 rounded-lg border-gray-200 dark:border-white/10"
                           onClick={() => setWatermarkY(prev => Math.min(100, prev + 1))}
                         >
-                          <ChevronDown className="w-4 h-4" />
+                          <ChevronDown className="w-5 h-5" />
                         </Button>
-                        <div />
+                        <Button
+                          variant={watermarkPosition === 'bottom-right' ? 'secondary' : 'outline'}
+                          size="sm"
+                          className={cn(
+                            "w-12 h-12 rounded-lg text-[8px] font-bold leading-tight p-1 transition-all",
+                            watermarkPosition === 'bottom-right' 
+                              ? "bg-blue-500/10 text-blue-500 border-blue-500/20" 
+                              : "border-gray-200 dark:border-white/10 text-gray-400"
+                          )}
+                          onClick={() => {
+                            setWatermarkPosition('bottom-right');
+                            setWatermarkX(95);
+                            setWatermarkY(95);
+                          }}
+                        >
+                          PHẢI<br/>DƯỚI
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -616,15 +681,20 @@ export default function App() {
                   {/* Live Preview Section */}
                   <div className="space-y-2 pt-2">
                     <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 ml-1">Xem trước đóng dấu</Label>
-                    <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5">
+                    <div className={cn(
+                      "relative w-full overflow-hidden border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5 transition-all duration-300",
+                      files.length > 0 ? "aspect-auto" : "aspect-video"
+                    )}>
                       <img 
                         src={files.length > 0 ? files[0].preview : "https://picsum.photos/seed/preview/800/600"} 
-                        className="w-full h-full object-cover opacity-40 select-none" 
+                        className="w-full h-auto block opacity-40 select-none" 
                         alt="Preview" 
                         draggable={false}
                       />
                       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                        <span className="text-[8px] uppercase font-bold text-gray-400 opacity-20 tracking-[0.2em]">Khu vực xem trước</span>
+                        <span className="text-[8px] uppercase font-bold text-gray-400 opacity-20 tracking-[0.2em]">
+                          {files.length > 0 ? "Xem trước trên ảnh thật" : "Khu vực xem trước"}
+                        </span>
                       </div>
                       
                       <div 
@@ -633,13 +703,18 @@ export default function App() {
                           opacity: watermarkOpacity,
                           left: `${watermarkX}%`,
                           top: `${watermarkY}%`,
-                          transform: 'translate(-50%, -50%)'
+                          transform: 'translate(-50%, -50%)',
+                          width: watermarkType === 'image' ? `${watermarkSize}%` : 'auto'
                         }}
                       >
                         {watermarkType === 'text' && watermarkText && (
                           <span 
-                            className="font-bold whitespace-nowrap text-[10px] select-none"
-                            style={{ color: watermarkColor, fontFamily: watermarkFont }}
+                            className="font-bold whitespace-nowrap select-none"
+                            style={{ 
+                              color: watermarkColor, 
+                              fontFamily: watermarkFont,
+                              fontSize: `calc(${watermarkSize}px * 0.5)`
+                            }}
                           >
                             {watermarkText}
                           </span>
@@ -647,7 +722,7 @@ export default function App() {
                         {watermarkType === 'image' && watermarkImage && (
                           <img 
                             src={watermarkImage} 
-                            className="max-w-[40px] h-auto drop-shadow-md select-none" 
+                            className="w-full h-auto select-none" 
                             alt="Watermark" 
                             draggable={false}
                           />
