@@ -15,14 +15,21 @@
 }
 
 .expert-glass {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: saturate(180%) blur(12px);
-  -webkit-backdrop-filter: saturate(180%) blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: saturate(180%) blur(30px);
+  -webkit-backdrop-filter: saturate(180%) blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .expert-shadow {
   box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.04), 0 1px 4px -1px rgba(0, 0, 0, 0.02);
+}
+
+.glass-morphism {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .btn-primary {
@@ -160,4 +167,212 @@
   html {
     @apply font-sans;
     }
+}
+
+/* Galaxy Background Styles */
+.galaxy-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background: #020205;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.dark .galaxy-bg {
+    opacity: 1;
+}
+
+.milky-way {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+        radial-gradient(circle at 50% 50%, 
+            rgba(50, 20, 100, 0.4) 0%, 
+            rgba(20, 40, 80, 0.2) 25%, 
+            transparent 50%),
+        radial-gradient(circle at 40% 60%, 
+            rgba(80, 30, 120, 0.3) 0%, 
+            transparent 40%),
+        radial-gradient(circle at 60% 40%, 
+            rgba(40, 80, 150, 0.2) 0%, 
+            transparent 40%);
+    filter: blur(60px);
+    transform: rotate(-30deg);
+    animation: nebulaPulse 15s ease-in-out infinite;
+}
+
+.stars-container {
+    position: absolute;
+    inset: 0;
+}
+
+.stars {
+    position: absolute;
+    inset: 0;
+    background-repeat: repeat;
+}
+
+.stars-1 {
+    background-image: 
+        radial-gradient(1px 1px at 15% 15%, #fff, transparent),
+        radial-gradient(1px 1px at 35% 25%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 55% 55%, #e0e0ff, transparent),
+        radial-gradient(1px 1px at 75% 35%, #fff, transparent),
+        radial-gradient(1px 1px at 95% 15%, #fff, transparent);
+    background-size: 250px 250px;
+    animation: twinkle 4s ease-in-out infinite;
+}
+
+.stars-2 {
+    background-image: 
+        radial-gradient(2px 2px at 25% 45%, #ffddee, transparent),
+        radial-gradient(1.5px 1.5px at 65% 80%, #ddeeff, transparent),
+        radial-gradient(2px 2px at 85% 60%, #fff, transparent);
+    background-size: 350px 350px;
+    animation: twinkle 6s ease-in-out infinite 1s;
+    opacity: 0.7;
+}
+
+.meteor {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.meteor::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100px;
+    height: 1px;
+    background: linear-gradient(90deg, #fff, transparent);
+}
+
+.m1 { top: 15%; left: 95%; animation: shoot 8s linear infinite 2s; }
+.m2 { top: 45%; left: 105%; animation: shoot 12s linear infinite 5s; }
+
+.vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.6) 100%);
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.2; }
+}
+
+@keyframes nebulaPulse {
+    0%, 100% { opacity: 0.6; transform: rotate(-30deg) scale(1); }
+    50% { opacity: 0.9; transform: rotate(-28deg) scale(1.1); }
+}
+
+@keyframes shoot {
+    0% { transform: translateX(0) translateY(0) rotate(-35deg); opacity: 0; }
+    5% { opacity: 1; }
+    15% { transform: translateX(-1200px) translateY(840px) rotate(-35deg); opacity: 0; }
+    100% { transform: translateX(-1200px) translateY(840px) rotate(-35deg); opacity: 0; }
+}
+
+/* Professional Neutral Backdrop (Light Mode) */
+.neutral-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f8faff 0%, #f0f4ff 50%, #e6eeff 100%);
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.dark .neutral-bg {
+    opacity: 0;
+}
+
+.light-source {
+    position: absolute;
+    top: -5%;
+    left: 10%;
+    width: 80vw;
+    height: 60vh;
+    background: radial-gradient(ellipse at center, rgba(239, 246, 255, 0.7) 0%, transparent 70%);
+    filter: blur(80px);
+}
+
+.grain-overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0.05;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
+}
+
+.abstract-shape {
+    position: absolute;
+    background: linear-gradient(45deg, #ffffff, #eef2ff);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    filter: blur(40px);
+    opacity: 0.4;
+    animation: morph 15s infinite alternate ease-in-out;
+}
+
+@keyframes morph {
+    0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: translate(0, 0) rotate(0deg); }
+    100% { border-radius: 50% 50% 20% 80% / 25% 80% 20% 75%; transform: translate(50px, 100px) rotate(15deg); }
+}
+
+.neutral-glass {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(35px) saturate(160%);
+    -webkit-backdrop-filter: blur(35px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 
+        0 8px 32px 0 rgba(31, 38, 135, 0.1),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.premium-card {
+    border-radius: 2.5rem;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .premium-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.premium-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 
+        0 40px 80px -15px rgba(0, 0, 0, 0.15),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.dark .premium-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 
+        0 40px 80px -15px rgba(0, 0, 0, 0.6),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }

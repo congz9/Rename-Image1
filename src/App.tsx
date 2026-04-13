@@ -270,12 +270,32 @@ export default function App() {
   return (
     <div className={cn(
       "min-h-screen transition-colors duration-300 font-sans selection:bg-blue-500 selection:text-white",
-      theme === 'dark' ? "bg-[#0A0A0A] text-white" : "bg-[#F8F9FA] text-[#1A1A1A]"
+      theme === 'dark' ? "bg-transparent text-white" : "bg-transparent text-[#1A1A1A]"
     )}
     onDragOver={onDragOver}
     onDragLeave={onDragLeave}
     onDrop={onDrop}
     >
+      {/* Professional Neutral Backdrop for Light Mode */}
+      <div className="neutral-bg">
+        <div className="grain-overlay"></div>
+        <div className="light-source"></div>
+        <div className="abstract-shape" style={{ width: '400px', height: '400px', top: '10%', right: '5%' }}></div>
+        <div className="abstract-shape" style={{ width: '300px', height: '300px', bottom: '5%', left: '10%', animationDelay: '-5s', opacity: 0.2 }}></div>
+      </div>
+
+      {/* Galaxy Background for Dark Mode */}
+      <div className="galaxy-bg">
+        <div className="milky-way"></div>
+        <div className="vignette"></div>
+        <div className="stars-container">
+          <div className="stars stars-1"></div>
+          <div className="stars stars-2"></div>
+        </div>
+        <div className="meteor m1"></div>
+        <div className="meteor m2"></div>
+      </div>
+
       <Toaster position="bottom-right" richColors closeButton />
       
       <AnimatePresence>
@@ -296,16 +316,16 @@ export default function App() {
 
       {/* Top Navigation */}
       <nav className={cn(
-        "sticky top-0 z-50 expert-glass h-16 flex items-center px-6 md:px-8 justify-between border-b transition-colors",
-        theme === 'dark' ? "bg-black/80 border-white/10" : "bg-white/80 border-black/[0.03]"
+        "sticky top-0 z-50 expert-glass h-16 flex items-center px-6 md:px-8 justify-between border-b transition-all duration-500",
+        theme === 'dark' ? "bg-black/40 border-white/10" : "bg-white/40 border-black/[0.03]"
       )}>
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20">
             <ImageIcon className="w-4 h-4 text-white" />
           </div>
           <div className="flex flex-col">
-            <span className="font-bold text-sm tracking-tight uppercase leading-none">Rename Image</span>
-            <span className="text-[10px] font-medium text-gray-400 uppercase tracking-widest mt-0.5">Professional Tool</span>
+            <span className="font-bold text-sm tracking-tight uppercase leading-none dark:text-white">Rename Image</span>
+            <span className="text-[10px] font-medium text-gray-400 dark:text-white/60 uppercase tracking-widest mt-0.5">Professional Tool</span>
           </div>
         </div>
         <div className="flex items-center gap-4">
@@ -322,7 +342,7 @@ export default function App() {
               variant="ghost" 
               size="sm"
               onClick={clearAll}
-              className="text-xs font-medium text-gray-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg"
+              className="text-[10px] font-bold uppercase tracking-wider text-gray-400 hover:text-red-500 hover:bg-red-50/50 dark:text-white/40 dark:hover:text-red-400 dark:hover:bg-red-500/10 rounded-xl backdrop-blur-md px-4 h-9 transition-all"
             >
               Xóa tất cả
             </Button>
@@ -331,7 +351,7 @@ export default function App() {
             onClick={downloadAll}
             disabled={files.length === 0 || isProcessing}
             size="sm"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 text-xs font-bold uppercase tracking-wider h-10 rounded-full shadow-lg shadow-blue-500/20 active:scale-95 transition-all"
+            className="bg-[#0F172A] hover:bg-[#1E293B] text-white px-8 text-[11px] font-bold uppercase tracking-widest h-11 rounded-xl shadow-xl active:scale-95 transition-all border border-white/10"
           >
             {isProcessing ? "Đang xử lý..." : "Xuất file ZIP"}
           </Button>
@@ -342,8 +362,8 @@ export default function App() {
         
         {/* Sidebar: Controls */}
         <aside className={cn(
-          "lg:col-span-3 border-r p-6 space-y-8 overflow-y-auto lg:h-[calc(100vh-4rem)] sticky top-16 transition-colors",
-          theme === 'dark' ? "bg-[#0F0F0F] border-white/5" : "bg-white border-black/[0.03]"
+          "lg:col-span-3 p-6 space-y-8 overflow-y-auto lg:h-[calc(100vh-5rem)] sticky top-20 transition-all duration-500 m-4 premium-card",
+          theme === 'dark' ? "bg-black/40 border-white/10" : "bg-white/40 border-white/60"
         )}>
           <div className="space-y-1">
             <p className="text-2xl font-bold tracking-tight uppercase">QUY TẮC</p>
@@ -351,64 +371,64 @@ export default function App() {
 
           <div className="space-y-6">
             <div className="space-y-2">
-              <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 ml-1">Tên gốc mới</Label>
+              <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Tên gốc mới</Label>
               <Input 
                 placeholder="WaterMark" 
                 value={baseName}
                 onChange={(e) => setBaseName(e.target.value)}
-                className="h-12 rounded-xl border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                className="h-12 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 ml-1">Tiền tố</Label>
-                <Input 
-                  placeholder="Pre_" 
-                  value={prefix}
-                  onChange={(e) => setPrefix(e.target.value)}
-                  className="h-12 rounded-xl border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 focus:ring-2 focus:ring-blue-500/20 transition-all"
-                />
+                <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Tiền tố</Label>
+                  <Input 
+                    placeholder="Pre_" 
+                    value={prefix}
+                    onChange={(e) => setPrefix(e.target.value)}
+                    className="h-12 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
+                  />
               </div>
               <div className="space-y-2">
-                <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 ml-1">Hậu tố</Label>
-                <Input 
-                  placeholder="_Suf" 
-                  value={suffix}
-                  onChange={(e) => setSuffix(e.target.value)}
-                  className="h-12 rounded-xl border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 focus:ring-2 focus:ring-blue-500/20 transition-all"
-                />
+                <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Hậu tố</Label>
+                  <Input 
+                    placeholder="_Suf" 
+                    value={suffix}
+                    onChange={(e) => setSuffix(e.target.value)}
+                    className="h-12 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
+                  />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 ml-1">Tìm chữ</Label>
-                <Input 
-                  placeholder="VD: Draft" 
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="h-12 rounded-xl border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 focus:ring-2 focus:ring-blue-500/20 transition-all"
-                />
+                <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Tìm chữ</Label>
+                  <Input 
+                    placeholder="VD: Draft" 
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="h-12 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
+                  />
               </div>
               <div className="space-y-2">
-                <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 ml-1">Thay bằng</Label>
-                <Input 
-                  placeholder="VD: Final" 
-                  value={replaceQuery}
-                  onChange={(e) => setReplaceQuery(e.target.value)}
-                  className="h-12 rounded-xl border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 focus:ring-2 focus:ring-blue-500/20 transition-all"
-                />
+                <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Thay bằng</Label>
+                  <Input 
+                    placeholder="VD: Final" 
+                    value={replaceQuery}
+                    onChange={(e) => setReplaceQuery(e.target.value)}
+                    className="h-12 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
+                  />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 ml-1">Số bắt đầu (Để trống để tắt)</Label>
+              <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Số bắt đầu (Để trống để tắt)</Label>
               <Input 
                 type="number" 
                 value={startNumber}
                 onChange={(e) => setStartNumber(e.target.value === '' ? '' : parseInt(e.target.value))}
-                className="h-12 rounded-xl border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                className="h-12 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
               />
             </div>
           </div>
@@ -417,7 +437,7 @@ export default function App() {
 
           <div className="space-y-6">
             <div className="flex items-center justify-between">
-              <p className="text-2xl font-bold tracking-tight uppercase">WATER MARK</p>
+              <p className="text-2xl font-bold tracking-tight uppercase dark:text-white">WATER MARK</p>
               <Switch 
                 checked={isWatermarkEnabled}
                 onCheckedChange={setIsWatermarkEnabled}
@@ -433,24 +453,24 @@ export default function App() {
                 className="space-y-6 overflow-hidden"
               >
                 <Tabs value={watermarkType} onValueChange={(v: any) => setWatermarkType(v)} className="w-full">
-                  <TabsList className="grid w-full grid-cols-2 bg-gray-100 dark:bg-white/5 p-1 rounded-xl h-10">
-                    <TabsTrigger value="text" className="text-[10px] font-bold uppercase">Chữ</TabsTrigger>
-                    <TabsTrigger value="image" className="text-[10px] font-bold uppercase">Logo</TabsTrigger>
+                  <TabsList className="grid w-full grid-cols-2 bg-gray-100/50 dark:bg-white/5 backdrop-blur-xl p-1 rounded-2xl h-12 border border-black/[0.03] dark:border-white/5">
+                    <TabsTrigger value="text" className="text-[10px] font-bold uppercase dark:text-white data-[state=active]:dark:bg-white/20 rounded-xl transition-all">Chữ</TabsTrigger>
+                    <TabsTrigger value="image" className="text-[10px] font-bold uppercase dark:text-white data-[state=active]:dark:bg-white/20 rounded-xl transition-all">Logo</TabsTrigger>
                   </TabsList>
                   
                   <TabsContent value="text" className="space-y-4 pt-4">
                     <div className="space-y-4">
                       <div className="space-y-2">
-                        <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 ml-1">Nội dung chữ</Label>
+                        <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Nội dung chữ</Label>
                         <Input 
                           placeholder="WaterMark" 
                           value={watermarkText}
                           onChange={(e) => setWatermarkText(e.target.value)}
-                          className="h-12 rounded-xl border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                          className="h-12 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 ml-1">Màu chữ</Label>
+                        <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Màu chữ</Label>
                         <div className="flex items-center gap-3">
                           <input 
                             type="color" 
@@ -461,17 +481,17 @@ export default function App() {
                           <Input 
                             value={watermarkColor}
                             onChange={(e) => setWatermarkColor(e.target.value)}
-                            className="h-12 rounded-xl border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 font-mono text-xs"
+                            className="h-12 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 neutral-glass font-mono text-xs dark:text-white"
                           />
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 ml-1">Font chữ</Label>
+                        <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Font chữ</Label>
                         <div className="relative">
                           <select
                             value={watermarkFont}
                             onChange={(e) => setWatermarkFont(e.target.value)}
-                            className="w-full h-12 px-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 text-sm font-medium focus:ring-2 focus:ring-blue-500/20 transition-all appearance-none cursor-pointer outline-none"
+                            className="w-full h-12 px-4 rounded-2xl border border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 neutral-glass text-sm font-medium focus:ring-2 focus:ring-blue-500/20 transition-all appearance-none cursor-pointer outline-none dark:text-white"
                             style={{ fontFamily: watermarkFont }}
                           >
                             {[
@@ -484,12 +504,12 @@ export default function App() {
                               { id: 'Open Sans', label: 'Open Sans' },
                               { id: 'JetBrains Mono', label: 'Mono' },
                             ].map((font) => (
-                              <option key={font.id} value={font.id} style={{ fontFamily: font.id }}>
+                              <option key={font.id} value={font.id} style={{ fontFamily: font.id }} className="dark:bg-gray-900">
                                 {font.label}
                               </option>
                             ))}
                           </select>
-                          <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                          <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400 dark:text-white/60">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                           </div>
                         </div>
@@ -499,18 +519,18 @@ export default function App() {
 
                   <TabsContent value="image" className="space-y-4 pt-4">
                     <div className="space-y-2">
-                      <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 ml-1">Tải logo lên</Label>
+                      <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Tải logo lên</Label>
                       <div 
                         onClick={() => watermarkInputRef.current?.click()}
-                        className="cursor-pointer h-24 border-2 border-dashed border-gray-200 dark:border-white/10 rounded-2xl flex flex-col items-center justify-center gap-2 hover:border-blue-500/50 transition-all"
+                        className="cursor-pointer h-24 border-2 border-dashed border-gray-200 dark:border-white/10 rounded-2xl flex flex-col items-center justify-center gap-2 hover:border-blue-500/50 transition-all bg-white/40 dark:bg-white/5 neutral-glass"
                       >
                         <input type="file" accept="image/*" onChange={handleWatermarkImageUpload} className="hidden" ref={watermarkInputRef} />
                         {watermarkImage ? (
                           <img src={watermarkImage} alt="Logo" className="h-16 object-contain" />
                         ) : (
                           <>
-                            <ImageIcon className="w-5 h-5 text-gray-400" />
-                            <span className="text-[10px] font-bold text-gray-400 uppercase">Chọn file logo</span>
+                            <ImageIcon className="w-5 h-5 text-gray-400 dark:text-white/60" />
+                            <span className="text-[10px] font-bold text-gray-400 dark:text-white/60 uppercase">Chọn file logo</span>
                           </>
                         )}
                       </div>
@@ -521,17 +541,17 @@ export default function App() {
                 <div className="space-y-6">
                   <div className="space-y-4">
                     <div className="flex flex-col items-center space-y-3 pt-2">
-                      <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500">Vị trí đóng dấu</Label>
+                      <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90">Vị trí đóng dấu</Label>
                       <div className="grid grid-cols-3 gap-2">
                         {/* Row 1 */}
                         <Button
                           variant={watermarkPosition === 'top-left' ? 'secondary' : 'outline'}
                           size="sm"
                           className={cn(
-                            "w-14 h-14 rounded-xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center",
+                            "w-14 h-14 rounded-2xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center neutral-glass",
                             watermarkPosition === 'top-left' 
-                              ? "bg-blue-500/10 text-blue-500 border-blue-500/20" 
-                              : "border-gray-200 dark:border-white/10 text-gray-400"
+                              ? "bg-blue-500/10 text-blue-500 border-blue-500/20 dark:bg-white/20 dark:text-white dark:border-white/30" 
+                              : "border-gray-200 dark:border-white/10 text-gray-400 dark:text-white dark:bg-white/5"
                           )}
                           onClick={() => {
                             setWatermarkPosition('top-left');
@@ -545,7 +565,7 @@ export default function App() {
                         <Button
                           variant="outline"
                           size="icon"
-                          className="w-14 h-14 rounded-xl border-gray-200 dark:border-white/10"
+                          className="w-14 h-14 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 dark:text-white neutral-glass"
                           onClick={() => setWatermarkY(prev => Math.max(0, prev - 1))}
                         >
                           <ChevronUp className="w-5 h-5" />
@@ -554,10 +574,10 @@ export default function App() {
                           variant={watermarkPosition === 'top-right' ? 'secondary' : 'outline'}
                           size="sm"
                           className={cn(
-                            "w-14 h-14 rounded-xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center",
+                            "w-14 h-14 rounded-2xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center neutral-glass",
                             watermarkPosition === 'top-right' 
-                              ? "bg-blue-500/10 text-blue-500 border-blue-500/20" 
-                              : "border-gray-200 dark:border-white/10 text-gray-400"
+                              ? "bg-blue-500/10 text-blue-500 border-blue-500/20 dark:bg-white/20 dark:text-white dark:border-white/30" 
+                              : "border-gray-200 dark:border-white/10 text-gray-400 dark:text-white dark:bg-white/5"
                           )}
                           onClick={() => {
                             setWatermarkPosition('top-right');
@@ -573,7 +593,7 @@ export default function App() {
                         <Button
                           variant="outline"
                           size="icon"
-                          className="w-14 h-14 rounded-xl border-gray-200 dark:border-white/10"
+                          className="w-14 h-14 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 dark:text-white neutral-glass"
                           onClick={() => setWatermarkX(prev => Math.max(0, prev - 1))}
                         >
                           <ChevronLeft className="w-5 h-5" />
@@ -582,10 +602,10 @@ export default function App() {
                           variant={watermarkPosition === 'center' ? 'secondary' : 'outline'}
                           size="sm"
                           className={cn(
-                            "w-14 h-14 rounded-xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center",
+                            "w-14 h-14 rounded-2xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center neutral-glass",
                             watermarkPosition === 'center' 
-                              ? "bg-blue-500/10 text-blue-500 border-blue-500/20" 
-                              : "border-gray-200 dark:border-white/10 text-gray-400"
+                              ? "bg-blue-500/10 text-blue-500 border-blue-500/20 dark:bg-white/20 dark:text-white dark:border-white/30" 
+                              : "border-gray-200 dark:border-white/10 text-gray-400 dark:text-white dark:bg-white/5"
                           )}
                           onClick={() => {
                             setWatermarkPosition('center');
@@ -598,7 +618,7 @@ export default function App() {
                         <Button
                           variant="outline"
                           size="icon"
-                          className="w-14 h-14 rounded-xl border-gray-200 dark:border-white/10"
+                          className="w-14 h-14 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 dark:text-white neutral-glass"
                           onClick={() => setWatermarkX(prev => Math.min(100, prev + 1))}
                         >
                           <ChevronRight className="w-5 h-5" />
@@ -609,10 +629,10 @@ export default function App() {
                           variant={watermarkPosition === 'bottom-left' ? 'secondary' : 'outline'}
                           size="sm"
                           className={cn(
-                            "w-14 h-14 rounded-xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center",
+                            "w-14 h-14 rounded-2xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center neutral-glass",
                             watermarkPosition === 'bottom-left' 
-                              ? "bg-blue-500/10 text-blue-500 border-blue-500/20" 
-                              : "border-gray-200 dark:border-white/10 text-gray-400"
+                              ? "bg-blue-500/10 text-blue-500 border-blue-500/20 dark:bg-white/20 dark:text-white dark:border-white/30" 
+                              : "border-gray-200 dark:border-white/10 text-gray-400 dark:text-white dark:bg-white/5"
                           )}
                           onClick={() => {
                             setWatermarkPosition('bottom-left');
@@ -626,7 +646,7 @@ export default function App() {
                         <Button
                           variant="outline"
                           size="icon"
-                          className="w-14 h-14 rounded-xl border-gray-200 dark:border-white/10"
+                          className="w-14 h-14 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 dark:text-white neutral-glass"
                           onClick={() => setWatermarkY(prev => Math.min(100, prev + 1))}
                         >
                           <ChevronDown className="w-5 h-5" />
@@ -635,10 +655,10 @@ export default function App() {
                           variant={watermarkPosition === 'bottom-right' ? 'secondary' : 'outline'}
                           size="sm"
                           className={cn(
-                            "w-14 h-14 rounded-xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center",
+                            "w-14 h-14 rounded-2xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center neutral-glass",
                             watermarkPosition === 'bottom-right' 
-                              ? "bg-blue-500/10 text-blue-500 border-blue-500/20" 
-                              : "border-gray-200 dark:border-white/10 text-gray-400"
+                              ? "bg-blue-500/10 text-blue-500 border-blue-500/20 dark:bg-white/20 dark:text-white dark:border-white/30" 
+                              : "border-gray-200 dark:border-white/10 text-gray-400 dark:text-white dark:bg-white/5"
                           )}
                           onClick={() => {
                             setWatermarkPosition('bottom-right');
@@ -655,9 +675,9 @@ export default function App() {
 
                   {/* Live Preview Section */}
                   <div className="space-y-2 pt-2">
-                    <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 ml-1">Xem trước đóng dấu</Label>
+                    <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Xem trước đóng dấu</Label>
                     <div className={cn(
-                      "relative w-full overflow-hidden border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5 transition-all duration-300",
+                      "relative w-full overflow-hidden border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5 backdrop-blur-md transition-all duration-500 premium-card",
                       files.length > 0 ? "aspect-auto" : "aspect-video"
                     )}>
                       <img 
@@ -708,48 +728,48 @@ export default function App() {
                     {/* Sliders moved below image */}
                     <div className="grid grid-cols-2 gap-4 pt-2">
                       <div className="space-y-2">
-                        <Label className="text-[10px] font-bold uppercase tracking-wider text-blue-500 ml-1">Kích thước: {watermarkSize}%</Label>
+                        <Label className="text-[10px] font-bold uppercase tracking-wider text-blue-500 dark:text-white ml-1">Kích thước: {watermarkSize}%</Label>
                         <input 
                           type="range"
                           min="1"
                           max="100"
                           value={watermarkSize}
                           onChange={(e) => setWatermarkSize(parseInt(e.target.value))}
-                          className="w-full h-1 bg-gray-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                          className="w-full h-1 bg-gray-200 dark:bg-white/20 rounded-lg appearance-none cursor-pointer accent-blue-500"
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label className="text-[10px] font-bold uppercase tracking-wider text-blue-500 ml-1">Độ mờ: {Math.round((watermarkOpacity || 0) * 100)}%</Label>
+                        <Label className="text-[10px] font-bold uppercase tracking-wider text-blue-500 dark:text-white ml-1">Độ mờ: {Math.round((watermarkOpacity || 0) * 100)}%</Label>
                         <input 
                           type="range"
                           min="0"
                           max="100"
                           value={(watermarkOpacity || 0) * 100}
                           onChange={(e) => setWatermarkOpacity(parseInt(e.target.value) / 100)}
-                          className="w-full h-1 bg-gray-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                          className="w-full h-1 bg-gray-200 dark:bg-white/20 rounded-lg appearance-none cursor-pointer accent-blue-500"
                         />
                       </div>
                     </div>
-                    <p className="text-[9px] text-gray-400 italic text-center">Dấu sẽ được áp dụng cho toàn bộ {files.length} ảnh khi xuất file.</p>
+                    <p className="text-[9px] text-gray-400 dark:text-white/60 italic text-center">Dấu sẽ được áp dụng cho toàn bộ {files.length} ảnh khi xuất file.</p>
                   </div>
                 </div>
               </motion.div>
             )}
           </div>
 
-          <Separator className="bg-gray-100 dark:bg-white/5" />
+          <Separator className="bg-gray-100 dark:bg-white/10" />
 
           <div className="pt-4">
             <div className={cn(
-              "rounded-2xl p-5 border space-y-3 transition-colors",
-              theme === 'dark' ? "bg-white/5 border-white/5" : "bg-gray-50 border-black/[0.03]"
+              "rounded-2xl p-5 border space-y-3 transition-colors backdrop-blur-md",
+              theme === 'dark' ? "bg-white/5 border-white/10" : "bg-gray-50 border-black/[0.03]"
             )}>
-              <p className="text-[9px] font-bold text-blue-500 uppercase tracking-widest">Xem trước định dạng</p>
+              <p className="text-[9px] font-bold text-blue-500 dark:text-white uppercase tracking-widest">Xem trước định dạng</p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-blue-500/10 rounded-xl flex items-center justify-center border border-blue-500/20">
-                  <FileText className="w-5 h-5 text-blue-500" />
+                <div className="w-10 h-10 bg-blue-500/10 dark:bg-white/10 rounded-xl flex items-center justify-center border border-blue-500/20 dark:border-white/20">
+                  <FileText className="w-5 h-5 text-blue-500 dark:text-white" />
                 </div>
-                <p className="text-sm font-mono font-medium truncate text-gray-500 dark:text-gray-400">
+                <p className="text-sm font-mono font-medium truncate text-gray-500 dark:text-white">
                   {prefix}{baseName || 'image'}{suffix}{startNumber !== '' ? `_${startNumber}` : ''}.jpg
                 </p>
               </div>
@@ -757,15 +777,15 @@ export default function App() {
           </div>
 
           <div className="pt-8 space-y-4">
-            <div className="flex items-center gap-3 text-xs text-gray-400 font-medium">
+            <div className="flex items-center gap-3 text-xs text-gray-400 dark:text-white/60 font-medium">
               <div className="w-5 h-5 rounded-full bg-emerald-500/10 flex items-center justify-center">
-                <CheckCircle2 className="w-3 h-3 text-emerald-500" />
+                <CheckCircle2 className="w-3 h-3 text-emerald-500 dark:text-emerald-400" />
               </div>
               <span>Giữ nguyên chất lượng gốc</span>
             </div>
-            <div className="flex items-center gap-3 text-xs text-gray-400 font-medium">
+            <div className="flex items-center gap-3 text-xs text-gray-400 dark:text-white/60 font-medium">
               <div className="w-5 h-5 rounded-full bg-emerald-500/10 flex items-center justify-center">
-                <CheckCircle2 className="w-3 h-3 text-emerald-500" />
+                <CheckCircle2 className="w-3 h-3 text-emerald-500 dark:text-emerald-400" />
               </div>
               <span>Xử lý an toàn tại máy</span>
             </div>
@@ -782,18 +802,18 @@ export default function App() {
               whileTap={{ scale: 0.99 }}
               onClick={() => fileInputRef.current?.click()}
               className={cn(
-                "group cursor-pointer rounded-[2.5rem] p-10 text-center space-y-6 border-2 border-dashed transition-all duration-300",
+                "group cursor-pointer p-10 text-center space-y-6 border-2 border-dashed transition-all duration-500 premium-card",
                 theme === 'dark' 
                   ? "bg-white/5 border-white/10 hover:border-blue-500/50 hover:bg-blue-500/5" 
-                  : "bg-white border-gray-200 hover:border-blue-500/50 hover:bg-blue-50"
+                  : "bg-white/40 border-white/60 hover:border-blue-500/50 hover:bg-blue-500/5"
               )}
             >
               <input type="file" multiple accept="image/*" onChange={handleFileSelect} className="hidden" ref={fileInputRef} />
-              <div className="w-16 h-16 bg-blue-500/10 text-blue-500 rounded-3xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
+              <div className="w-16 h-16 bg-blue-500/10 dark:bg-white/10 text-blue-500 dark:text-white rounded-3xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300 backdrop-blur-md">
                 <Upload className="w-7 h-7" />
               </div>
               <div className="space-y-2">
-                <p className="text-sm text-gray-400">Kéo thả hoặc nhấn để chọn ảnh</p>
+                <p className="text-sm text-gray-400 dark:text-white/60">Kéo thả hoặc nhấn để chọn ảnh</p>
               </div>
             </motion.div>
 
@@ -802,18 +822,18 @@ export default function App() {
               whileTap={{ scale: 0.99 }}
               onClick={() => folderInputRef.current?.click()}
               className={cn(
-                "group cursor-pointer rounded-[2.5rem] p-10 text-center space-y-6 border-2 border-dashed transition-all duration-300",
+                "group cursor-pointer p-10 text-center space-y-6 border-2 border-dashed transition-all duration-500 premium-card",
                 theme === 'dark' 
                   ? "bg-white/5 border-white/10 hover:border-emerald-500/50 hover:bg-emerald-500/5" 
-                  : "bg-white border-gray-200 hover:border-emerald-500/50 hover:bg-emerald-50"
+                  : "bg-white/40 border-white/60 hover:border-emerald-500/50 hover:bg-emerald-500/5"
               )}
             >
               <input type="file" {...({ webkitdirectory: "", directory: "" } as any)} onChange={handleFileSelect} className="hidden" ref={folderInputRef} />
-              <div className="w-16 h-16 bg-emerald-500/10 text-emerald-500 rounded-3xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
+              <div className="w-16 h-16 bg-emerald-500/10 dark:bg-white/10 text-emerald-500 dark:text-white rounded-3xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300 backdrop-blur-md">
                 <FolderOpen className="w-7 h-7" />
               </div>
               <div className="space-y-2">
-                <p className="text-sm text-gray-400">Nhập toàn bộ ảnh từ thư mục</p>
+                <p className="text-sm text-gray-400 dark:text-white/60">Nhập toàn bộ ảnh từ thư mục</p>
               </div>
             </motion.div>
           </div>
@@ -822,21 +842,23 @@ export default function App() {
           <div className="space-y-8">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <h2 className="text-2xl font-bold tracking-tight uppercase">THƯ VIỆN</h2>
-                <Badge variant="secondary" className="bg-blue-500/10 text-blue-500 border-none px-3 py-1 rounded-full text-xs font-bold">
+                <h2 className="text-2xl font-bold tracking-tight uppercase dark:text-white">THƯ VIỆN</h2>
+                <Badge variant="secondary" className="bg-blue-500/10 text-blue-500 dark:bg-white/20 dark:text-white border-none px-3 py-1 rounded-full text-xs font-bold backdrop-blur-md">
                   {files.length} mục
                 </Badge>
               </div>
               
               {files.length > 0 && (
-                <div className="flex items-center bg-gray-100 dark:bg-white/5 p-1 rounded-xl border border-black/[0.03] dark:border-white/5">
+                <div className="flex items-center bg-gray-100/50 dark:bg-white/5 p-1 rounded-2xl border border-black/[0.03] dark:border-white/5 backdrop-blur-xl">
                   <Button
                     variant={viewMode === 'grid' ? 'secondary' : 'ghost'}
                     size="sm"
                     onClick={() => setViewMode('grid')}
                     className={cn(
                       "rounded-lg h-8 px-3 gap-2 text-xs font-bold transition-all",
-                      viewMode === 'grid' ? "bg-white dark:bg-white/10 shadow-sm" : "text-gray-400"
+                      viewMode === 'grid' 
+                        ? "bg-white/40 dark:bg-white/20 dark:text-white shadow-sm backdrop-blur-md" 
+                        : "text-gray-400 dark:text-white/60 dark:hover:text-white"
                     )}
                   >
                     <LayoutGrid className="w-3.5 h-3.5" />
@@ -848,7 +870,9 @@ export default function App() {
                     onClick={() => setViewMode('list')}
                     className={cn(
                       "rounded-lg h-8 px-3 gap-2 text-xs font-bold transition-all",
-                      viewMode === 'list' ? "bg-white dark:bg-white/10 shadow-sm" : "text-gray-400"
+                      viewMode === 'list' 
+                        ? "bg-white/40 dark:bg-white/20 dark:text-white shadow-sm backdrop-blur-md" 
+                        : "text-gray-400 dark:text-white/60 dark:hover:text-white"
                     )}
                   >
                     <List className="w-3.5 h-3.5" />
@@ -860,8 +884,8 @@ export default function App() {
 
             {files.length === 0 ? (
               <div className={cn(
-                "border-2 border-dashed rounded-[3rem] py-32 text-center space-y-6 transition-colors",
-                theme === 'dark' ? "bg-white/2 border-white/5" : "bg-white border-gray-100"
+                "border-2 border-dashed rounded-[3rem] py-32 text-center space-y-6 transition-colors backdrop-blur-md",
+                theme === 'dark' ? "bg-white/2 border-white/5" : "bg-white/40 border-gray-200"
               )}>
                 <div className="w-20 h-20 bg-gray-50 dark:bg-white/5 rounded-full flex items-center justify-center mx-auto border border-black/[0.03] dark:border-white/5">
                   <ImageIcon className="w-10 h-10 text-gray-200 dark:text-gray-700" />
@@ -889,7 +913,7 @@ export default function App() {
                         exit={{ opacity: 0, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
                         className={cn(
-                          "group relative flex rounded-3xl bg-white dark:bg-white/5 border border-black/[0.03] dark:border-white/5 overflow-hidden hover:border-blue-500/30 transition-all duration-300",
+                          "group relative flex overflow-hidden hover:border-blue-500/30 transition-all duration-500 premium-card",
                           viewMode === 'grid' ? "flex-col" : "flex-row items-center p-4 gap-6"
                         )}
                       >
