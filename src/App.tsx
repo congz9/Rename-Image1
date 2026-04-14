@@ -358,8 +358,9 @@ export default function App() {
       <main className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-0 min-h-[calc(100vh-4rem)]">
         
         {/* Sidebar: Controls */}
-        <aside className="lg:col-span-3 p-6 space-y-8 overflow-y-auto lg:h-[calc(100vh-5rem)] sticky top-20 transition-all duration-500 m-4 premium-card">
-          <div className="space-y-1">
+        <aside className="lg:col-span-3 py-6 pl-6 pr-2 lg:h-[calc(100vh-5rem)] sticky top-20 transition-all duration-500 m-4 premium-card flex flex-col">
+          <div className="flex-1 overflow-y-auto pr-4 space-y-8">
+            <div className="space-y-1">
             <p className="text-2xl font-bold tracking-tight uppercase dark:text-white/80">QUY TẮC</p>
           </div>
 
@@ -516,7 +517,7 @@ export default function App() {
                       <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/70 ml-1">Tải logo lên</Label>
                       <div 
                         onClick={() => watermarkInputRef.current?.click()}
-                        className="cursor-pointer h-24 border-2 border-dashed border-gray-200 dark:border-white/10 rounded-2xl flex flex-col items-center justify-center gap-2 hover:border-blue-500/50 transition-all neutral-glass"
+                        className="cursor-pointer h-24 rounded-2xl flex flex-col items-center justify-center gap-2 hover:border-blue-500/50 transition-all neutral-glass"
                       >
                         <input type="file" accept="image/*" onChange={handleWatermarkImageUpload} className="hidden" ref={watermarkInputRef} />
                         {watermarkImage ? (
@@ -784,6 +785,7 @@ export default function App() {
               <span>Xử lý an toàn tại máy</span>
             </div>
           </div>
+          </div>
         </aside>
 
         {/* Main Content: Upload & Grid */}
@@ -796,7 +798,7 @@ export default function App() {
               whileTap={{ scale: 0.99 }}
               onClick={() => fileInputRef.current?.click()}
               className={cn(
-                "group cursor-pointer p-10 text-center space-y-6 border-2 border-dashed transition-all duration-500 premium-card",
+                "group cursor-pointer p-10 text-center space-y-6 transition-all duration-500 premium-card",
                 theme === 'dark' 
                   ? "hover:border-blue-500/50 hover:bg-blue-500/5" 
                   : "hover:border-blue-500/50 hover:bg-blue-500/5"
@@ -816,7 +818,7 @@ export default function App() {
               whileTap={{ scale: 0.99 }}
               onClick={() => folderInputRef.current?.click()}
               className={cn(
-                "group cursor-pointer p-10 text-center space-y-6 border-2 border-dashed transition-all duration-500 premium-card",
+                "group cursor-pointer p-10 text-center space-y-6 transition-all duration-500 premium-card",
                 theme === 'dark' 
                   ? "hover:border-emerald-500/50 hover:bg-emerald-500/5" 
                   : "hover:border-emerald-500/50 hover:bg-emerald-500/5"
@@ -877,10 +879,7 @@ export default function App() {
             </div>
 
             {files.length === 0 ? (
-              <div className={cn(
-                "border-2 border-dashed rounded-[3rem] py-32 text-center space-y-6 transition-colors backdrop-blur-md",
-                theme === 'dark' ? "bg-white/2 border-white/5" : "bg-white/40 border-gray-200"
-              )}>
+              <div className="rounded-[3rem] py-32 text-center space-y-6 premium-card">
                 <div className="w-20 h-20 bg-gray-50 dark:bg-white/5 rounded-full flex items-center justify-center mx-auto border border-black/[0.03] dark:border-white/5">
                   <ImageIcon className="w-10 h-10 text-gray-200 dark:text-gray-700" />
                 </div>
