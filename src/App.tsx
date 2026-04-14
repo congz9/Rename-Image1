@@ -315,10 +315,7 @@ export default function App() {
       </AnimatePresence>
 
       {/* Top Navigation */}
-      <nav className={cn(
-        "sticky top-0 z-50 expert-glass h-16 flex items-center px-6 md:px-8 justify-between border-b transition-all duration-500",
-        theme === 'dark' ? "bg-black/40 border-white/10" : "bg-white/40 border-black/[0.03]"
-      )}>
+      <nav className="sticky top-0 z-50 expert-glass h-16 flex items-center px-6 md:px-8 justify-between border-b transition-all duration-500">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20">
             <ImageIcon className="w-4 h-4 text-white" />
@@ -361,74 +358,71 @@ export default function App() {
       <main className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-0 min-h-[calc(100vh-4rem)]">
         
         {/* Sidebar: Controls */}
-        <aside className={cn(
-          "lg:col-span-3 p-6 space-y-8 overflow-y-auto lg:h-[calc(100vh-5rem)] sticky top-20 transition-all duration-500 m-4 premium-card",
-          theme === 'dark' ? "bg-black/40 border-white/10" : "bg-white/40 border-white/60"
-        )}>
+        <aside className="lg:col-span-3 p-6 space-y-8 overflow-y-auto lg:h-[calc(100vh-5rem)] sticky top-20 transition-all duration-500 m-4 premium-card">
           <div className="space-y-1">
-            <p className="text-2xl font-bold tracking-tight uppercase">QUY TẮC</p>
+            <p className="text-2xl font-bold tracking-tight uppercase dark:text-white/80">QUY TẮC</p>
           </div>
 
           <div className="space-y-6">
             <div className="space-y-2">
-              <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Tên gốc mới</Label>
+              <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/70 ml-1">Tên gốc mới</Label>
               <Input 
                 placeholder="WaterMark" 
                 value={baseName}
                 onChange={(e) => setBaseName(e.target.value)}
-                className="h-12 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
+                className="h-12 rounded-2xl neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Tiền tố</Label>
+                <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/70 ml-1">Tiền tố</Label>
                   <Input 
                     placeholder="Pre_" 
                     value={prefix}
                     onChange={(e) => setPrefix(e.target.value)}
-                    className="h-12 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
+                    className="h-12 rounded-2xl neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
                   />
               </div>
               <div className="space-y-2">
-                <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Hậu tố</Label>
+                <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/70 ml-1">Hậu tố</Label>
                   <Input 
                     placeholder="_Suf" 
                     value={suffix}
                     onChange={(e) => setSuffix(e.target.value)}
-                    className="h-12 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
+                    className="h-12 rounded-2xl neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
                   />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Tìm chữ</Label>
+                <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/70 ml-1">Tìm chữ</Label>
                   <Input 
                     placeholder="VD: Draft" 
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="h-12 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
+                    className="h-12 rounded-2xl neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
                   />
               </div>
               <div className="space-y-2">
-                <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Thay bằng</Label>
+                <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/70 ml-1">Thay bằng</Label>
                   <Input 
                     placeholder="VD: Final" 
                     value={replaceQuery}
                     onChange={(e) => setReplaceQuery(e.target.value)}
-                    className="h-12 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
+                    className="h-12 rounded-2xl neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
                   />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Số bắt đầu (Để trống để tắt)</Label>
+              <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/70 ml-1">Số bắt đầu (Để trống để tắt)</Label>
               <Input 
                 type="number" 
                 value={startNumber}
                 onChange={(e) => setStartNumber(e.target.value === '' ? '' : parseInt(e.target.value))}
-                className="h-12 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
+                className="h-12 rounded-2xl neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
               />
             </div>
           </div>
@@ -453,24 +447,24 @@ export default function App() {
                 className="space-y-6 overflow-hidden"
               >
                 <Tabs value={watermarkType} onValueChange={(v: any) => setWatermarkType(v)} className="w-full">
-                  <TabsList className="grid w-full grid-cols-2 bg-gray-100/50 dark:bg-white/5 backdrop-blur-xl p-1 rounded-2xl h-12 border border-black/[0.03] dark:border-white/5">
-                    <TabsTrigger value="text" className="text-[10px] font-bold uppercase dark:text-white data-[state=active]:dark:bg-white/20 rounded-xl transition-all">Chữ</TabsTrigger>
-                    <TabsTrigger value="image" className="text-[10px] font-bold uppercase dark:text-white data-[state=active]:dark:bg-white/20 rounded-xl transition-all">Logo</TabsTrigger>
+                  <TabsList className="grid w-full grid-cols-2 neutral-glass p-1 rounded-2xl h-12">
+                    <TabsTrigger value="text" className="text-[10px] font-bold uppercase dark:text-white data-[state=active]:dark:bg-white/10 rounded-xl transition-all">Chữ</TabsTrigger>
+                    <TabsTrigger value="image" className="text-[10px] font-bold uppercase dark:text-white data-[state=active]:dark:bg-white/10 rounded-xl transition-all">Logo</TabsTrigger>
                   </TabsList>
                   
                   <TabsContent value="text" className="space-y-4 pt-4">
                     <div className="space-y-4">
                       <div className="space-y-2">
-                        <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Nội dung chữ</Label>
+                        <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/70 ml-1">Nội dung chữ</Label>
                         <Input 
                           placeholder="WaterMark" 
                           value={watermarkText}
                           onChange={(e) => setWatermarkText(e.target.value)}
-                          className="h-12 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
+                          className="h-12 rounded-2xl neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Màu chữ</Label>
+                        <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/70 ml-1">Màu chữ</Label>
                         <div className="flex items-center gap-3">
                           <input 
                             type="color" 
@@ -481,17 +475,17 @@ export default function App() {
                           <Input 
                             value={watermarkColor}
                             onChange={(e) => setWatermarkColor(e.target.value)}
-                            className="h-12 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 neutral-glass font-mono text-xs dark:text-white"
+                            className="h-12 rounded-2xl neutral-glass font-mono text-xs dark:text-white"
                           />
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Font chữ</Label>
+                        <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/70 ml-1">Font chữ</Label>
                         <div className="relative">
                           <select
                             value={watermarkFont}
                             onChange={(e) => setWatermarkFont(e.target.value)}
-                            className="w-full h-12 px-4 rounded-2xl border border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 neutral-glass text-sm font-medium focus:ring-2 focus:ring-blue-500/20 transition-all appearance-none cursor-pointer outline-none dark:text-white"
+                            className="w-full h-12 px-4 rounded-2xl neutral-glass text-sm font-medium focus:ring-2 focus:ring-blue-500/20 transition-all appearance-none cursor-pointer outline-none dark:text-white"
                             style={{ fontFamily: watermarkFont }}
                           >
                             {[
@@ -519,10 +513,10 @@ export default function App() {
 
                   <TabsContent value="image" className="space-y-4 pt-4">
                     <div className="space-y-2">
-                      <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Tải logo lên</Label>
+                      <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/70 ml-1">Tải logo lên</Label>
                       <div 
                         onClick={() => watermarkInputRef.current?.click()}
-                        className="cursor-pointer h-24 border-2 border-dashed border-gray-200 dark:border-white/10 rounded-2xl flex flex-col items-center justify-center gap-2 hover:border-blue-500/50 transition-all bg-white/40 dark:bg-white/5 neutral-glass"
+                        className="cursor-pointer h-24 border-2 border-dashed border-gray-200 dark:border-white/10 rounded-2xl flex flex-col items-center justify-center gap-2 hover:border-blue-500/50 transition-all neutral-glass"
                       >
                         <input type="file" accept="image/*" onChange={handleWatermarkImageUpload} className="hidden" ref={watermarkInputRef} />
                         {watermarkImage ? (
@@ -541,7 +535,7 @@ export default function App() {
                 <div className="space-y-6">
                   <div className="space-y-4">
                     <div className="flex flex-col items-center space-y-3 pt-2">
-                      <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90">Vị trí đóng dấu</Label>
+                      <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/70">Vị trí đóng dấu</Label>
                       <div className="grid grid-cols-3 gap-2">
                         {/* Row 1 */}
                         <Button
@@ -551,7 +545,7 @@ export default function App() {
                             "w-14 h-14 rounded-2xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center neutral-glass",
                             watermarkPosition === 'top-left' 
                               ? "bg-blue-500/10 text-blue-500 border-blue-500/20 dark:bg-white/20 dark:text-white dark:border-white/30" 
-                              : "border-gray-200 dark:border-white/10 text-gray-400 dark:text-white dark:bg-white/5"
+                              : "text-gray-400 dark:text-white"
                           )}
                           onClick={() => {
                             setWatermarkPosition('top-left');
@@ -565,7 +559,7 @@ export default function App() {
                         <Button
                           variant="outline"
                           size="icon"
-                          className="w-14 h-14 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 dark:text-white neutral-glass"
+                          className="w-14 h-14 rounded-2xl dark:text-white neutral-glass"
                           onClick={() => setWatermarkY(prev => Math.max(0, prev - 1))}
                         >
                           <ChevronUp className="w-5 h-5" />
@@ -577,7 +571,7 @@ export default function App() {
                             "w-14 h-14 rounded-2xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center neutral-glass",
                             watermarkPosition === 'top-right' 
                               ? "bg-blue-500/10 text-blue-500 border-blue-500/20 dark:bg-white/20 dark:text-white dark:border-white/30" 
-                              : "border-gray-200 dark:border-white/10 text-gray-400 dark:text-white dark:bg-white/5"
+                              : "text-gray-400 dark:text-white"
                           )}
                           onClick={() => {
                             setWatermarkPosition('top-right');
@@ -593,7 +587,7 @@ export default function App() {
                         <Button
                           variant="outline"
                           size="icon"
-                          className="w-14 h-14 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 dark:text-white neutral-glass"
+                          className="w-14 h-14 rounded-2xl dark:text-white neutral-glass"
                           onClick={() => setWatermarkX(prev => Math.max(0, prev - 1))}
                         >
                           <ChevronLeft className="w-5 h-5" />
@@ -605,7 +599,7 @@ export default function App() {
                             "w-14 h-14 rounded-2xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center neutral-glass",
                             watermarkPosition === 'center' 
                               ? "bg-blue-500/10 text-blue-500 border-blue-500/20 dark:bg-white/20 dark:text-white dark:border-white/30" 
-                              : "border-gray-200 dark:border-white/10 text-gray-400 dark:text-white dark:bg-white/5"
+                              : "text-gray-400 dark:text-white"
                           )}
                           onClick={() => {
                             setWatermarkPosition('center');
@@ -618,7 +612,7 @@ export default function App() {
                         <Button
                           variant="outline"
                           size="icon"
-                          className="w-14 h-14 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 dark:text-white neutral-glass"
+                          className="w-14 h-14 rounded-2xl dark:text-white neutral-glass"
                           onClick={() => setWatermarkX(prev => Math.min(100, prev + 1))}
                         >
                           <ChevronRight className="w-5 h-5" />
@@ -632,7 +626,7 @@ export default function App() {
                             "w-14 h-14 rounded-2xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center neutral-glass",
                             watermarkPosition === 'bottom-left' 
                               ? "bg-blue-500/10 text-blue-500 border-blue-500/20 dark:bg-white/20 dark:text-white dark:border-white/30" 
-                              : "border-gray-200 dark:border-white/10 text-gray-400 dark:text-white dark:bg-white/5"
+                              : "text-gray-400 dark:text-white"
                           )}
                           onClick={() => {
                             setWatermarkPosition('bottom-left');
@@ -646,7 +640,7 @@ export default function App() {
                         <Button
                           variant="outline"
                           size="icon"
-                          className="w-14 h-14 rounded-2xl border-gray-200 dark:border-white/10 bg-white/40 dark:bg-white/5 dark:text-white neutral-glass"
+                          className="w-14 h-14 rounded-2xl dark:text-white neutral-glass"
                           onClick={() => setWatermarkY(prev => Math.min(100, prev + 1))}
                         >
                           <ChevronDown className="w-5 h-5" />
@@ -658,7 +652,7 @@ export default function App() {
                             "w-14 h-14 rounded-2xl text-[7px] font-bold leading-tight p-1 transition-all flex flex-col items-center justify-center neutral-glass",
                             watermarkPosition === 'bottom-right' 
                               ? "bg-blue-500/10 text-blue-500 border-blue-500/20 dark:bg-white/20 dark:text-white dark:border-white/30" 
-                              : "border-gray-200 dark:border-white/10 text-gray-400 dark:text-white dark:bg-white/5"
+                              : "text-gray-400 dark:text-white"
                           )}
                           onClick={() => {
                             setWatermarkPosition('bottom-right');
@@ -804,8 +798,8 @@ export default function App() {
               className={cn(
                 "group cursor-pointer p-10 text-center space-y-6 border-2 border-dashed transition-all duration-500 premium-card",
                 theme === 'dark' 
-                  ? "bg-white/5 border-white/10 hover:border-blue-500/50 hover:bg-blue-500/5" 
-                  : "bg-white/40 border-white/60 hover:border-blue-500/50 hover:bg-blue-500/5"
+                  ? "hover:border-blue-500/50 hover:bg-blue-500/5" 
+                  : "hover:border-blue-500/50 hover:bg-blue-500/5"
               )}
             >
               <input type="file" multiple accept="image/*" onChange={handleFileSelect} className="hidden" ref={fileInputRef} />
@@ -824,8 +818,8 @@ export default function App() {
               className={cn(
                 "group cursor-pointer p-10 text-center space-y-6 border-2 border-dashed transition-all duration-500 premium-card",
                 theme === 'dark' 
-                  ? "bg-white/5 border-white/10 hover:border-emerald-500/50 hover:bg-emerald-500/5" 
-                  : "bg-white/40 border-white/60 hover:border-emerald-500/50 hover:bg-emerald-500/5"
+                  ? "hover:border-emerald-500/50 hover:bg-emerald-500/5" 
+                  : "hover:border-emerald-500/50 hover:bg-emerald-500/5"
               )}
             >
               <input type="file" {...({ webkitdirectory: "", directory: "" } as any)} onChange={handleFileSelect} className="hidden" ref={folderInputRef} />
@@ -918,7 +912,7 @@ export default function App() {
                         )}
                       >
                         <div className={cn(
-                          "bg-gray-50 dark:bg-black/20 overflow-hidden relative shrink-0",
+                          "bg-gray-50 dark:bg-black/40 overflow-hidden relative shrink-0",
                           viewMode === 'grid' ? "aspect-square w-full" : "w-24 h-24 rounded-2xl"
                         )}>
                           <img 
