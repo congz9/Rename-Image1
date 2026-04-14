@@ -670,9 +670,9 @@ export default function App() {
 
                   {/* Live Preview Section */}
                   <div className="space-y-2 pt-2">
-                    <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/90 ml-1">Xem trước đóng dấu</Label>
+                    <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/70 ml-1">Xem trước đóng dấu</Label>
                     <div className={cn(
-                      "relative w-full overflow-hidden border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5 backdrop-blur-md transition-all duration-500 premium-card",
+                      "relative w-full overflow-hidden border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5 backdrop-blur-md transition-all duration-500 premium-card !rounded-none",
                       files.length > 0 ? "aspect-auto" : "aspect-video"
                     )}>
                       <img 
