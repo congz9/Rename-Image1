@@ -368,7 +368,7 @@ export default function App() {
             <div className="space-y-2">
               <Label className="text-[11px] font-bold uppercase tracking-wider text-blue-500 dark:text-white/70 ml-1">Tên gốc mới</Label>
               <Input 
-                placeholder="SH01_SC01_Background" 
+                placeholder="SC01_SH01_Background" 
                 value={baseName}
                 onChange={(e) => setBaseName(e.target.value)}
                 className="h-12 rounded-2xl neutral-glass focus:ring-2 focus:ring-blue-500/20 transition-all dark:text-white dark:placeholder:text-white/40"
